@@ -1,0 +1,8 @@
+data/ipl_json
+.venv
+mlflow_db
+mlflowruns
+__pycache__
+.env
+/artifacts
+.DS_Store

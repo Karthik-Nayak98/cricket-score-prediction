@@ -1,0 +1,104 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: .venv/bin/python -m src.data.data_ingestion
+    deps:
+    - path: ./config/params.yaml
+      hash: md5
+      md5: a972395e6fa770982f693991257c0204
+      size: 270
+    - path: ./data/match_summary.csv
+      hash: md5
+      md5: db85c4d588467902b3ffd944b9863fe5
+      size: 5890449
+    - path: ./src/data/data_ingestion.py
+      hash: md5
+      md5: f96c7ace5acbc5e5c85a76515627015d
+      size: 3572
+    params:
+      config/params.yaml:
+        data_ingestion.test_size: 0.2
+    outs:
+    - path: data/raw
+      hash: md5
+      md5: 272e73784e8ca3964036ec8296b9bc21.dir
+      size: 4791190
+      nfiles: 4
+  model_building:
+    cmd: .venv/bin/python -m src.train
+    deps:
+    - path: ./data/match_summary.csv
+      hash: md5
+      md5: db85c4d588467902b3ffd944b9863fe5
+      size: 5890449
+    - path: ./src/data/data_ingestion.py
+      hash: md5
+      md5: f96c7ace5acbc5e5c85a76515627015d
+      size: 3572
+    - path: ./src/train.py
+      hash: md5
+      md5: adbaba1b101e4b58f67a0011884d6911
+      size: 3017
+    params:
+      config/params.yaml:
+        algorithm: xgboost
+        linear_regression:
+          fit_intercept: true
+        random_forest:
+          n_estimators: 500
+          max_depth: 10
+          random_state: 42
+        xgboost:
+          learning_rate: 0.1
+          n_estimators: 100
+          max_depth: 3
+          random_state: 42
+          subsample: 0.8
+    outs:
+    - path: models/score_prediction.pkl
+      hash: md5
+      md5: bff689a763d1ace53e7c369fd6a89788
+      size: 130112
+  model_evaluation:
+    cmd: .venv/bin/python -m src.evaluate
+    deps:
+    - path: ./src/evaluate.py
+      hash: md5
+      md5: 2e7b2583351488249d3104452036aee1
+      size: 5143
+    - path: ./src/train.py
+      hash: md5
+      md5: adbaba1b101e4b58f67a0011884d6911
+      size: 3017
+    - path: models/score_prediction.pkl
+      hash: md5
+      md5: bff689a763d1ace53e7c369fd6a89788
+      size: 130112
+    outs:
+    - path: models/experiments_info.json
+      hash: md5
+      md5: cd903cac60c3369dd7094b7ce50bb747
+      size: 81
+  data_preprocessing:
+    cmd: .venv/bin/python -m src.data_preprocessing
+    deps:
+    - path: ./src/data_preprocessing.py
+      hash: md5
+      md5: dc6bab7211d06f10936aa27f79cf08a7
+      size: 5073
+    outs:
+    - path: data/match_summary.csv
+      hash: md5
+      md5: db85c4d588467902b3ffd944b9863fe5
+      size: 5890449
+  model_registration:
+    cmd: .venv/bin/python -m src.register_model
+    deps:
+    - path: models/experiments_info.json
+      hash: md5
+      md5: 05855b766f6da9efc89f0bbe7774d92e
+      size: 107
+    - path: src/register_model.py
+      hash: md5
+      md5: 5b150cfeb20821645a717e53cd8867ab
+      size: 1842

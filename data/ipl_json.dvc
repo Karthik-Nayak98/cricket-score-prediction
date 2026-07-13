@@ -1,0 +1,6 @@
+outs:
+- md5: 9402a634a470136d963cf2039e352314.dir
+  size: 92729947
+  nfiles: 1233
+  hash: md5
+  path: ipl_json

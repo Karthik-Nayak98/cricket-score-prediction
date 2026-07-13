@@ -62,7 +62,7 @@ jobs:
 
       - name: Promote model to production
         if: success()
-        run: python scripts/promote_model.py
+        run: python src/promote_model.py
             
       # - name: SSH into Oracle VM #   uses: appleboy/ssh-action@v1
       #   with:

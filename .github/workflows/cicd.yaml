@@ -5,6 +5,10 @@ jobs:
 
   deploy-model:
     runs-on: ubuntu-latest
+    # Global fix for the OCI chunked encoding error
+    env:
+      AWS_REQUEST_CHECKSUM_CALCULATION: WHEN_REQUIRED
+      AWS_RESPONSE_CHECKSUM_VALIDATION: WHEN_REQUIRED
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -24,9 +28,10 @@ jobs:
         run: |
            pip3 install -r requirements.txt
     
-      - name: Pull the data from Gdrive
+      - name: Pull the data from OCI object storage
         env: 
-          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.OCI_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.OCI_SECRET_ACCESS_KEY }}
         run: |
             dvc pull
 
@@ -34,18 +39,15 @@ jobs:
         run: |
             dvc repro
     
-      - name: Push the DVC-tracked data to remote
+      - name: Push the DVC-tracked data to OCI Object storage
         env: 
-          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.OCI_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.OCI_SECRET_ACCESS_KEY }}
         run: |
            dvc push 
 
       - name: Promote model to production
         if: success()
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
         run: python scripts/promote_model.py
             
       # - name: SSH into Oracle VM #   uses: appleboy/ssh-action@v1

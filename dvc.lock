@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   data_ingestion:
-    cmd: .venv/bin/python -m src.data.data_ingestion
+    cmd: python -m src.data.data_ingestion
     deps:
     - path: ./config/params.yaml
       hash: md5
@@ -25,7 +25,7 @@ stages:
       size: 4791190
       nfiles: 4
   model_building:
-    cmd: .venv/bin/python -m src.train
+    cmd: python -m src.train
     deps:
     - path: ./data/match_summary.csv
       hash: md5
@@ -60,7 +60,7 @@ stages:
       md5: bff689a763d1ace53e7c369fd6a89788
       size: 130112
   model_evaluation:
-    cmd: .venv/bin/python -m src.evaluate
+    cmd: python -m src.evaluate
     deps:
     - path: ./src/evaluate.py
       hash: md5
@@ -77,10 +77,10 @@ stages:
     outs:
     - path: models/experiments_info.json
       hash: md5
-      md5: cd903cac60c3369dd7094b7ce50bb747
+      md5: 753119007b75eafb045276a4e95ae31c
       size: 81
   data_preprocessing:
-    cmd: .venv/bin/python -m src.data_preprocessing
+    cmd: python -m src.data_preprocessing
     deps:
     - path: ./src/data_preprocessing.py
       hash: md5
@@ -92,12 +92,12 @@ stages:
       md5: db85c4d588467902b3ffd944b9863fe5
       size: 5890449
   model_registration:
-    cmd: .venv/bin/python -m src.register_model
+    cmd: python -m src.register_model
     deps:
     - path: models/experiments_info.json
       hash: md5
-      md5: 05855b766f6da9efc89f0bbe7774d92e
-      size: 107
+      md5: 753119007b75eafb045276a4e95ae31c
+      size: 81
     - path: src/register_model.py
       hash: md5
       md5: 5b150cfeb20821645a717e53cd8867ab

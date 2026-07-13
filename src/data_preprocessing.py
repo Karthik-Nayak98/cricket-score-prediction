@@ -182,5 +182,5 @@ delivery_df.dropna(inplace=True)
 
 
 delivery_df.to_csv(
-    "/Users/karnayak/Personal/cricket_mlops/data/match_summary.csv", index=False
+    "./data/match_summary.csv", index=False
 )

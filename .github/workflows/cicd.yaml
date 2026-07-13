@@ -47,16 +47,16 @@ jobs:
   serve_model:
     runs-on: ubuntu-latest
     steps:
-        - name: SSH into Oracle VM
-          uses: appleboy/ssh-action@v1
-          with:
-            host: ${{ secrets.SSH_HOST }}
-            username: ${{ secrets.SSH_USERNAME }}
-            key: ${{ secrets.SSH_TOKEN }}
-            script: |
-              whoami
-              hostname
-              pwd
+        # - name: SSH into Oracle VM
+        #   uses: appleboy/ssh-action@v1
+        #   with:
+        #     host: ${{ secrets.SSH_HOST }}
+        #     username: ${{ secrets.SSH_USERNAME }}
+        #     key: ${{ secrets.SSH_TOKEN }}
+        #     script: |
+        #       whoami
+        #       hostname
+        #       pwd
         - name: Log in to Docker Hub
           uses: docker/login-action@v4
           with:

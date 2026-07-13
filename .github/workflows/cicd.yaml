@@ -46,6 +46,20 @@ jobs:
         run: |
            dvc push 
 
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          
+          # Only commit and push if there are actual changes to prevent workflow crashes
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Automated commit of DVC outputs and updated code" || echo "No changes to commit"
+            git push origin main
+          else
+            echo "No changes detected. Skipping push."
+          fi
+
       - name: Promote model to production
         if: success()
         run: python scripts/promote_model.py

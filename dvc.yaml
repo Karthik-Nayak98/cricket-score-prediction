@@ -3,13 +3,13 @@ vars:
 
 stages:
   data_preprocessing:
-    cmd: .venv/bin/python -m src.data_preprocessing
+    cmd: python -m src.data_preprocessing
     deps:
       - ./src/data_preprocessing.py
     outs:
       - data/match_summary.csv
   data_ingestion:
-    cmd: .venv/bin/python -m src.data.data_ingestion
+    cmd: python -m src.data.data_ingestion
     deps:
       - ./src/data/data_ingestion.py
       - ./config/params.yaml
@@ -21,7 +21,7 @@ stages:
       - data/raw
 
   model_building:
-    cmd: .venv/bin/python -m src.train
+    cmd: python -m src.train
     deps:
       - ./src/data/data_ingestion.py
       - ./data/match_summary.csv
@@ -36,7 +36,7 @@ stages:
       - models/score_prediction.pkl
 
   model_evaluation:
-    cmd: .venv/bin/python -m src.evaluate
+    cmd: python -m src.evaluate
     deps:
       - models/score_prediction.pkl
       - ./src/evaluate.py
@@ -45,7 +45,7 @@ stages:
       - models/experiments_info.json
 
   model_registration:
-    cmd: .venv/bin/python -m src.register_model
+    cmd: python -m src.register_model
     deps:
       - models/experiments_info.json
       - src/register_model.py

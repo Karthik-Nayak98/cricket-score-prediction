@@ -54,7 +54,7 @@ jobs:
           
           # Only commit and push if there are actual changes to prevent workflow crashes
           if ! git diff-index --quiet HEAD; then
-            git commit -m "Automated commit of DVC outputs and updated code" || echo "No changes to commit"
+            git commit -m "automated commit of DVC outputs and updated code [skip ci]"
             git push origin main
           else
             echo "No changes detected. Skipping push."

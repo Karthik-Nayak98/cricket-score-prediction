@@ -6,3 +6,5 @@ __pycache__
 .env
 /artifacts
 .DS_Store
+mlflow.db
+model_building_errors.log

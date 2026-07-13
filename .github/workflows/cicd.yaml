@@ -24,7 +24,7 @@ jobs:
         run: |
            pip3 install -r requirements.txt
     
-      - name: Run DVC pipelines
+      - name: Pull the data from Gdrive
         env: 
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |

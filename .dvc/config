@@ -2,5 +2,5 @@
     remote = oci
     autostage = true
 ['remote "oci"']
-    url = s3://mlops-data
+    url = s3://mlops_data
     endpointurl = https://bmuk6t9bcvb4.compat.objectstorage.ap-mumbai-1.oraclecloud.com

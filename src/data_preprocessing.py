@@ -4,9 +4,9 @@ import json
 from tqdm import tqdm
 
 filenames = []
-for file in os.listdir("/Users/karnayak/Personal/cricket_mlops/data/ipl_json"):
+for file in os.listdir("./data/ipl_json"):
     filenames.append(
-        os.path.join("/Users/karnayak/Personal/cricket_mlops/data/ipl_json", file)
+        os.path.join("./data/ipl_json", file)
     )
 
 

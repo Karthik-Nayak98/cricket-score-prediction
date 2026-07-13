@@ -33,6 +33,7 @@ jobs:
             CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }} 
             CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
         run: |
+           dvc init
            dvc push 
 
       - name: Promote model to production
@@ -64,9 +65,9 @@ jobs:
 
         - name: Build images
           run: |
-            docker build -t ${{ secrets.DOCKER_USERNAME }}/cricket-score-frontend:latest ./frontend
-            docker build -t ${{ secrets.DOCKER_USERNAME }}/cricket-score-backend:latest ./backend
-            docker build -t ${{ secrets.DOCKER_USERNAME }}/cricket-score-mlflow:latest ./mlflow
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/cricket-score-frontend:latest frontend
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/cricket-score-backend:latest backend
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/cricket-score-mlflow:latest mlflow
 
         - name: Push images
           run: |

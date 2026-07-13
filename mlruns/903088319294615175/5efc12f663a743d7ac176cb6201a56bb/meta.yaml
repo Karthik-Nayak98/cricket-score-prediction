@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/cricket-score-prediction/cricket-score-prediction/mlruns/903088319294615175/5efc12f663a743d7ac176cb6201a56bb/artifacts
+end_time: 1783945312818
+entry_point_name: ''
+experiment_id: '903088319294615175'
+lifecycle_stage: active
+run_id: 5efc12f663a743d7ac176cb6201a56bb
+run_name: xgboost
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1783945309719
+status: 3
+tags: []
+user_id: runner

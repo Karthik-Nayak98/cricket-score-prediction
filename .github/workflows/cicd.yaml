@@ -26,8 +26,7 @@ jobs:
     
       - name: Run DVC pipelines
         env: 
-            CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }} 
-            CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
             dvc pull
 
@@ -37,8 +36,7 @@ jobs:
     
       - name: Push the DVC-tracked data to remote
         env: 
-            CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }} 
-            CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
            dvc push 
 

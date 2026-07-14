@@ -1,5 +1,6 @@
 name: MLOps CICD
 on:
+  workflow_dispatch: 
   push:
     branches: 
       - main
@@ -102,7 +103,7 @@ jobs:
           source: docker-compose.yml
           target: ~/cricket-app
 
-      - name: SSH into Oracle VM #   uses: appleboy/ssh-action@v1
+      - name: SSH into Oracle VM
         if: steps.changes.outputs.compose == 'true' || steps.changes.outputs.frontend == 'true' || steps.changes.outcome.backend == 'true'
         uses: appleboy/ssh-action@v1.2.2
         with:

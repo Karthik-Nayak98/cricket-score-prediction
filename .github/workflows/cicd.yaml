@@ -112,6 +112,6 @@ jobs:
           key: ${{ secrets.SSH_TOKEN }}
           script: |
             cd ~/cricket-app
-            docker-compose pull
+            docker compose pull
             docker compose up -d 
 

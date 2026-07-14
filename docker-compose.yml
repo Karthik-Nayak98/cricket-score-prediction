@@ -1,19 +1,14 @@
 services
   backend:
-    build:
-      context: ./backend
+    image: docker push 94822karthik/cricket-score-backend:latest
     container_name: backend
-    depends_on: 
-      - postgres
-      - mlflow
     ports:
       - "8000:8000"
     environment: 
       MLFLOW_TRACKING_URI: "http://mlflow:5000"
 
   frontend:
-    build: 
-      context: ./frontend
+    image: docker push 94822karthik/cricket-score-frontend:latest
     container_name: frontend
     depends_on:
        - backend

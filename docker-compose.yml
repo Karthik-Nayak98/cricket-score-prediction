@@ -1,35 +1,4 @@
-services: 
-  postgres:
-    container_name: postgres
-    image: "postgres:trixie"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mlflowdb
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql
-  
-  mlflow:
-    build:
-      context: ./mlflow
-    container_name: mlflow
-    ports: 
-      - "5000:5000"
-    depends_on:
-      - postgres
-    volumes:
-      - ./artifacts:/mlflow/artifacts
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mlflowdb
-    command: >
-      mlflow server 
-      --backend-store-uri $$DATABASE_URL
-      --artifacts-destination /mlflow/artifacts
-      --host 0.0.0.0
-      --port 5000
-
+services
   backend:
     build:
       context: ./backend
@@ -52,6 +21,3 @@ services:
       - "8501:8501"
     environment: 
       BACKEND_URI: 'http://backend:8000'
-  
-volumes:
-  postgres-data:

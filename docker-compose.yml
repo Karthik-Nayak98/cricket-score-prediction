@@ -1,7 +1,9 @@
-services
+services:
   backend:
     image: 94822karthik/cricket-score-backend:latest
     container_name: backend
+    networks:
+      - mlops-network
     ports:
       - "8000:8000"
     environment: 
@@ -10,9 +12,16 @@ services
   frontend:
     image: 94822karthik/cricket-score-frontend:latest
     container_name: frontend
+    networks:
+      - mlops-network
     depends_on:
        - backend
     ports:
       - "8501:8501"
     environment: 
       BACKEND_URI: 'http://backend:8000'
+
+networks:
+  mlops-network:
+    name: mlops-network
+    driver: bridge

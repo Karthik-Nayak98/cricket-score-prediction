@@ -1,6 +1,8 @@
 name: MLOps CICD
 on:
-  workflow_dispatch:
+  push:
+    branches: 
+      - main
 jobs: 
 
   deploy-model:
@@ -13,11 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Debug
-        run: |
-          pwd
-          ls -la
-          find . -name "requirements.txt"
 
       - name: Setup Python 
         uses: actions/setup-python@v6
@@ -38,7 +35,7 @@ jobs:
 
       - name: Run DVC pipelines
         run: |
-            dvc repro
+            dvc repro --force
     
       - name: Push the DVC-tracked data to OCI Object storage
         env: 

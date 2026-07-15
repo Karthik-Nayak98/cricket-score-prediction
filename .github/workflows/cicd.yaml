@@ -12,7 +12,8 @@ jobs:
     env:
       AWS_REQUEST_CHECKSUM_CALCULATION: WHEN_REQUIRED
       AWS_RESPONSE_CHECKSUM_VALIDATION: WHEN_REQUIRED
-      MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+      # MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+      MLFLOW_TRACKING_URI: "http://161.118.182.54:5000/"
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -88,8 +89,8 @@ jobs:
       - name: Build and push backend image
         if: steps.changes.outputs.backend == 'true'
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/cricket-score-backend:latest
           docker build -t ${{ secrets.DOCKER_USERNAME }}/cricket-score-backend:latest backend
+          docker push ${{ secrets.DOCKER_USERNAME }}/cricket-score-backend:latest
 
       - name: Build and push frontend images
         if: steps.changes.outputs.frontend == 'true'

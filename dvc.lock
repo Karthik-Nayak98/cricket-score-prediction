@@ -5,8 +5,8 @@ stages:
     deps:
     - path: ./config/params.yaml
       hash: md5
-      md5: a972395e6fa770982f693991257c0204
-      size: 270
+      md5: e893af642eb0e8662d4c71ac5be56ec8
+      size: 276
     - path: ./data/match_summary.csv
       hash: md5
       md5: 0f24ef889a31aab0b67cefcc531c1c13
@@ -41,7 +41,7 @@ stages:
       size: 3017
     params:
       config/params.yaml:
-        algorithm: xgboost
+        algorithm: random_forest
         linear_regression:
           fit_intercept: true
         random_forest:
@@ -57,8 +57,8 @@ stages:
     outs:
     - path: models/score_prediction.pkl
       hash: md5
-      md5: 2b0020918956cadf69cbb3b7d3a4a4dd
-      size: 123295
+      md5: 5a7ba4e76fbb9ec991e1e2978dca6216
+      size: 53769409
   model_evaluation:
     cmd: python -m src.evaluate
     deps:
@@ -72,13 +72,13 @@ stages:
       size: 3017
     - path: models/score_prediction.pkl
       hash: md5
-      md5: 2b0020918956cadf69cbb3b7d3a4a4dd
-      size: 123295
+      md5: 5a7ba4e76fbb9ec991e1e2978dca6216
+      size: 53769409
     outs:
     - path: models/experiments_info.json
       hash: md5
-      md5: fafe815a7080201c1a2e2b6d921dd5fe
-      size: 81
+      md5: f502fe3d95db3b5b6e4a5d178773a80e
+      size: 87
   data_preprocessing:
     cmd: python -m src.data_preprocessing
     deps:
@@ -96,8 +96,8 @@ stages:
     deps:
     - path: models/experiments_info.json
       hash: md5
-      md5: 64b158a3c9c02cec418e3e2aec0604a2
-      size: 107
+      md5: 39f75c09537086122799ff77b59f0940
+      size: 113
     - path: src/register_model.py
       hash: md5
       md5: 6893890a092ca89f5d034491d8f0960d

@@ -1,4 +1,4 @@
-algorithm: "xgboost"
+algorithm: "random_forest"
 
 data_ingestion:
   test_size: 0.20

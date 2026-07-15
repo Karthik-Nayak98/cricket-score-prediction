@@ -8,7 +8,6 @@ app = FastAPI()
 MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI")
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 
-print("MLFLOW_TRACKING_URI", MLFLOW_TRACKING_URI)
 
 def load_model():
     model_uri = "models:/cricket-score-prediction@champion"
@@ -27,8 +26,8 @@ async def predict(data: dict):
 
     champion_model = load_model()
 
-    total_balls =  data["overs"] * 6 + data["balls"]
-    balls_left = 120 - total_balls 
+    total_balls = data["overs"] * 6 + data["balls"]
+    balls_left = 120 - total_balls
     wickets_left = 10 - data["wickets_fallen"]
     crr = int(data["runs_scored"]) / (total_balls / 6)
 

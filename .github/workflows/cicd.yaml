@@ -104,7 +104,7 @@ jobs:
           target: ~/cricket-app
 
       - name: SSH into Oracle VM
-        if: steps.changes.outputs.compose == 'true' || steps.changes.outputs.frontend == 'true' || steps.changes.outcome.backend == 'true'
+        if: steps.changes.outputs.compose == 'true' || steps.changes.outputs.frontend == 'true' || steps.changes.outputs.backend == 'true'
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.SSH_HOST }}

@@ -8,6 +8,7 @@ BACKEND_URI = os.getenv("BACKEND_URI")
 if not BACKEND_URI:
     raise RuntimeError("BACKEND_URI is not configured")
 
+
 def send_prediction_request(
     batting_team, bowling_team, overs, balls, runs_scored, wickets_fallen, city
 ):

@@ -1,4 +1,4 @@
-services: 
+services:
   postgres:
     container_name: postgres
     image: "postgres:16-alpine"
@@ -36,14 +36,14 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  
+
   mlflow:
     build:
-      context: ./mlflow
+      context: .
     container_name: mlflow
     networks:
       - mlops-network
-    ports: 
+    ports:
       - "5000:5000"
     depends_on:
       postgres:
@@ -53,13 +53,16 @@ services:
       - ./artifacts:/mlflow/artifacts
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mlflowdb
-    command: >
-      mlflow server 
-      --backend-store-uri $$DATABASE_URL
-      --artifacts-destination /mlflow/artifacts
-      --host 0.0.0.0
-      --port 5000
-      --workers 1
+    command:
+      - sh
+      - -c
+      - |
+        mlflow server \
+        --backend-store-uri "$$DATABASE_URL" \
+        --artifacts-destination /mlflow/artifacts \
+        --host 0.0.0.0 \
+        --port 5000 \
+        --workers 1
     logging:
       driver: json-file
       options:

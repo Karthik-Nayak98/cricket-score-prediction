@@ -64,8 +64,8 @@ stages:
     deps:
     - path: ./src/evaluate.py
       hash: md5
-      md5: 2e7b2583351488249d3104452036aee1
-      size: 5143
+      md5: 0751b588a5d7fecf15ee0b93ccbca974
+      size: 5194
     - path: ./src/train.py
       hash: md5
       md5: adbaba1b101e4b58f67a0011884d6911
@@ -77,7 +77,7 @@ stages:
     outs:
     - path: models/experiments_info.json
       hash: md5
-      md5: 7b1c3a562cde149a25046d356df42293
+      md5: 64706cf04f47b979263b96ebf009a0c3
       size: 81
   data_preprocessing:
     cmd: python -m src.data_preprocessing
@@ -96,9 +96,9 @@ stages:
     deps:
     - path: models/experiments_info.json
       hash: md5
-      md5: bea911878af0acabb3edb624b1f173cc
+      md5: a56e75f26955be8f73c99194f2dfed64
       size: 107
     - path: src/register_model.py
       hash: md5
-      md5: 5b150cfeb20821645a717e53cd8867ab
-      size: 1842
+      md5: 6893890a092ca89f5d034491d8f0960d
+      size: 1893

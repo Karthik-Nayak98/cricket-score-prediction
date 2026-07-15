@@ -9,6 +9,8 @@ load_dotenv()
 MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI")
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 
+print("MLFLOW_TRACKING_URI", MLFLOW_TRACKING_URI)
+
 client = mlflow.MlflowClient()
 logger = setup_logging()  # Initialize logging configuration
 

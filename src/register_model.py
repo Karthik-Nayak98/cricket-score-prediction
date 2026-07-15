@@ -11,6 +11,8 @@ load_dotenv()
 MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI")
 mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
 
+print("MLFLOW_TRACKING_URI", MLFLOW_TRACKING_URI)
+
 logger = setup_logging()  # Initialize logging configuration
 
 MODEL_NAME = "cricket-score-prediction"  # Centralized model name for MLflow Model Registry

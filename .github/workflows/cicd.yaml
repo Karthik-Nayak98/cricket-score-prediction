@@ -23,6 +23,10 @@ jobs:
             python-version: '3.12' 
             cache: pip # Cache the pip requirments
       
+      - name: Verify MLflow URI
+        run: |
+          echo "MLFLOW_TRACKING_URI=$MLFLOW_TRACKING_URI"
+
       - name: Install dependencies
         run: |
            pip3 install -r requirements.txt

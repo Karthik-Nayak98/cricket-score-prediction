@@ -24,4 +24,5 @@ services:
 networks:
   mlops-network:
     name: mlops-network
+    external: true
     driver: bridge
